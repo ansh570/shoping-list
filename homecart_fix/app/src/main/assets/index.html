@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta name="theme-color" content="#16a34a">
+  <title>HomeCart — Smart Household Shopping List</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a href="#" class="brand">🛒 <span>HomeCart</span></a>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#list">Shopping List</a>
+      <a href="#categories">Categories</a>
+      <a href="#shopping-mode">Shopping Mode</a>
+    </nav>
+    <button id="themeBtn" class="icon-btn" aria-label="Toggle dark mode">🌙</button>
+  </header>
+
+  <main class="container">
+    <section id="home" class="hero">
+      <div>
+        <span class="eyebrow">HOUSEHOLD SHOPPING</span>
+        <h1>What's running out at home?</h1>
+        <p>Add it before you forget it. Keep your everyday shopping organized in one simple place.</p>
+        <div class="hero-actions">
+          <a href="#add" class="primary-btn">＋ Add Something</a>
+          <button id="heroMicBtn" class="dark-btn">🎤 Add by Mic</button>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="cart">🛒</div>
+        <span>🥛</span><span>🍎</span><span>🍚</span><span>🧼</span>
+      </div>
+    </section>
+
+    <section class="stats">
+      <article class="stat-card"><span>🛒</span><strong id="totalCount">0</strong><small>Items to Buy</small></article>
+      <article class="stat-card"><span>⚠️</span><strong id="lowCount">0</strong><small>Running Low</small></article>
+      <article class="stat-card"><span>🔥</span><strong id="urgentCount">0</strong><small>Urgent</small></article>
+      <article class="stat-card"><span>✅</span><strong id="doneCount">0</strong><small>Purchased</small></article>
+    </section>
+
+    <section class="quick-section">
+      <div class="section-heading">
+        <div><span class="eyebrow">ONE TAP</span><h2>Quick Add</h2></div>
+        <span class="muted">Tap an item to add it</span>
+      </div>
+      <div class="quick-grid">
+        <button data-quick="Milk">🥛<b>Milk</b></button>
+        <button data-quick="Bread">🍞<b>Bread</b></button>
+        <button data-quick="Eggs">🥚<b>Eggs</b></button>
+        <button data-quick="Rice">🍚<b>Rice</b></button>
+        <button data-quick="Soap">🧼<b>Soap</b></button>
+        <button data-quick="Toothpaste">🪥<b>Toothpaste</b></button>
+        <button data-quick="Apples">🍎<b>Apples</b></button>
+        <button data-quick="Shampoo">🧴<b>Shampoo</b></button>
+      </div>
+    </section>
+
+    <div class="layout">
+      <section id="add" class="panel add-panel">
+        <div class="section-heading"><div><span class="eyebrow">NEW ITEM</span><h2>Add to your list</h2></div></div>
+        <form id="itemForm">
+          <label>Item name<input id="itemName" required placeholder="e.g. Milk"></label>
+          <div class="two">
+            <label>Quantity<input id="quantity" placeholder="e.g. 2 litres"></label>
+            <label>Category
+              <select id="category">
+                <option>Grocery</option><option>Dairy</option><option>Vegetables</option><option>Fruits</option>
+                <option>Household</option><option>Personal Care</option><option>Snacks</option><option>Other</option>
+              </select>
+            </label>
+          </div>
+          <div class="two">
+            <label>Status<select id="status"><option>Finished</option><option>Running Low</option></select></label>
+            <label>Priority<select id="priority"><option>Normal</option><option>Important</option><option>Urgent</option></select></label>
+          </div>
+          <label>Note<textarea id="note" rows="3" placeholder="Optional note"></textarea></label>
+          <div class="form-actions">
+            <button class="primary-btn" type="submit">＋ Add to Shopping List</button>
+            <button class="mic-btn" type="button" id="micBtn">🎤 <span id="micText">Add by Mic</span></button>
+          </div>
+          <p id="voiceStatus" class="voice-status"></p>
+        </form>
+      </section>
+
+      <section id="list" class="panel list-panel">
+        <div class="section-heading">
+          <div><span class="eyebrow">YOUR ITEMS</span><h2>Today's Shopping List</h2></div>
+          <div class="toolbar-actions"><button id="pdfBtn" class="small-btn">📄 Create PDF</button><button id="clearDone" class="small-btn">Clear purchased</button></div>
+        </div>
+        <div class="filters">
+          <input id="search" placeholder="🔍 Search your list...">
+          <select id="filter"><option value="all">All</option><option value="pending">Pending</option><option value="done">Purchased</option><option value="low">Running Low</option><option value="urgent">Urgent</option></select>
+        </div>
+        <div id="shoppingList"></div>
+      </section>
+    </div>
+
+    <section id="categories" class="panel">
+      <div class="section-heading"><div><span class="eyebrow">ORGANIZE</span><h2>Categories</h2></div></div>
+      <div class="category-grid">
+        <article><span>🥛</span><b>Dairy</b><small>Milk, butter, cheese</small></article>
+        <article><span>🍚</span><b>Grocery</b><small>Rice, flour, oil</small></article>
+        <article><span>🥦</span><b>Vegetables</b><small>Fresh vegetables</small></article>
+        <article><span>🍎</span><b>Fruits</b><small>Fresh fruits</small></article>
+        <article><span>🧼</span><b>Household</b><small>Cleaning supplies</small></article>
+        <article><span>🪥</span><b>Personal Care</b><small>Daily essentials</small></article>
+        <article><span>🍪</span><b>Snacks</b><small>Snacks and treats</small></article>
+        <article><span>📦</span><b>Other</b><small>Anything else</small></article>
+      </div>
+    </section>
+
+    <section id="shopping-mode" class="panel shopping-mode">
+      <div class="section-heading"><div><span class="eyebrow">IN THE SHOP</span><h2>🛍️ Shopping Mode</h2></div></div>
+      <p class="muted">Large, simple checklist for when you're walking around the store.</p>
+      <div id="shoppingModeList"></div>
+    </section>
+
+    <section class="tip"><span>💡</span><div><b>Shopping Tip</b><p>Whenever something finishes at home, add it immediately. Your next shopping trip will be much easier.</p></div></section>
+  </main>
+
+  <footer>🛒 <b>HomeCart</b> · Never run out of the things you need ❤️</footer>
+  <script src="script.js"></script>
+</body>
+</html>
